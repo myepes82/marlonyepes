@@ -13,7 +13,7 @@ app.use(cors({
 }))
 app.use(morgan("common"))
 
-app.get("/api/healt", (req, res) => {
+app.get("/", (req, res) => {
     res.send({
         "status": "ok"
     }).status(200)
