@@ -1,0 +1,38 @@
+/* Dentro de tu archivo styles.css o en una hoja de estilos separada */
+/* Agrega clases para tabletas */
+@media (max-width: 1023px) and (min-width: 769px){
+    .profile-items {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /* Esto alinea los elementos horizontalmente */
+        flex-wrap: wrap;
+        /* Esto permite que los elementos se envuelvan cuando no haya suficiente espacio en pantalla */
+        gap: 16px;
+        /* Espacio entre elementos (ajusta según tus necesidades) */
+    }
+
+    .profile-item {
+        flex: 1;
+        /* Hace que los elementos ocupen el mismo espacio horizontalmente */
+        max-width: calc(50% - 8px);
+        /* Ajusta el ancho de los elementos según tu diseño (50% para 2 elementos por fila) */
+    }
+}
+
+@media (max-width: 768px){
+    .profile-items {
+        width: 100%;
+    }
+
+    .profile-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex: 1;
+        /* Hace que los elementos ocupen el mismo espacio horizontalmente */
+        width: 100%;
+        
+        /* Ajusta el ancho de los elementos según tu diseño (50% para 2 elementos por fila) */
+    }
+}
