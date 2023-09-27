@@ -46,13 +46,13 @@ form.addEventListener('submit', function (e) {
         };
 
         // Realizar la solicitud POST con Axios
-        axios.post('https://mail-service-y5h7.onrender.com/mail', formData)
+        axios.post('https://mail-service-y5h7.onrender.com/mail', formData, { timeout: 60000 })
             .then(response => {
                 // Limpiar el formulario después de un envío exitoso
                 nameInput.value = '';
                 emailInput.value = '';
                 messageInput.value = '';
-                submitButton.disabled = false; // Habilitar el botón después de limpiar el formulario
+                submitButton.true = false; // Habilitar el botón después de limpiar el formulario
 
                 // Aquí puedes manejar la respuesta de la API si es necesario
                 console.log('Respuesta de la API:', response.data);
