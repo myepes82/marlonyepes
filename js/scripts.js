@@ -1,72 +1,99 @@
-const form = document.getElementById('contact-form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const messageInput = document.getElementById('message');
-const nameError = document.getElementById('name-error');
-const emailError = document.getElementById('email-error');
-const messageError = document.getElementById('message-error');
-const submitButton = document.getElementById('submit-button');
+const form = document.getElementById("contact-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const nameError = document.getElementById("name-error");
+const emailError = document.getElementById("email-error");
+const messageError = document.getElementById("message-error");
+const submitButton = document.getElementById("submit-button");
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+function showError(element, message) {
+  element.textContent = message;
+  element.classList.remove("hidden");
+}
 
-    let valid = true;
+function hideError(element) {
+  element.textContent = "";
+  element.classList.add("hidden");
+}
 
-    if (nameInput.value.length < 3) {
-        nameError.classList.remove('hidden');
-        valid = false;
-    } else {
-        nameError.classList.add('hidden');
-    }
+function validateName() {
+  if (nameInput.value.length < 3) {
+    showError(nameError, "Name must be at least 3 characters long.");
+    return false;
+  }
+  hideError(nameError);
+  return true;
+}
 
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(emailInput.value)) {
-        emailError.classList.remove('hidden');
-        valid = false;
-    } else {
-        emailError.classList.add('hidden');
-    }
+function validateEmail() {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(emailInput.value)) {
+    showError(emailError, "Enter a valid email address.");
+    return false;
+  }
+  hideError(emailError);
+  return true;
+}
 
-    if (messageInput.value.length < 20 || messageInput.value.length > 255) {
-        messageError.classList.remove('hidden');
-        valid = false;
-    } else {
-        messageError.classList.add('hidden');
-    }
+function validateMessage() {
+  if (messageInput.value.length < 20 || messageInput.value.length > 255) {
+    showError(
+      messageError,
+      "Message must be between 20 and 255 characters long."
+    );
+    return false;
+  }
+  hideError(messageError);
+  return true;
+}
 
-    if (valid) {
-        // Deshabilitar el botón de envío para evitar múltiples envíos
-        submitButton.disabled = true;
+function validateForm() {
+  const isNameValid = validateName();
+  const isEmailValid = validateEmail();
+  const isMessageValid = validateMessage();
+  return isNameValid && isEmailValid && isMessageValid;
+}
 
-        // Crear un objeto con los datos del formulario
-        const formData = {
-            name: nameInput.value,
-            email: emailInput.value,
-            message: messageInput.value
-        };
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
 
-        // Realizar la solicitud POST con Axios
-        axios.post('https://mail-service-y5h7.onrender.com/mail', formData, { timeout: 60000 })
-            .then(response => {
-                // Limpiar el formulario después de un envío exitoso
-                nameInput.value = '';
-                emailInput.value = '';
-                messageInput.value = '';
-                submitButton.true = false; // Habilitar el botón después de limpiar el formulario
+  if (validateForm()) {
+    submitButton.disabled = true;
 
-                // Aquí puedes manejar la respuesta de la API si es necesario
-                console.log('Respuesta de la API:', response.data);
-            })
-            .catch(error => {
-                // Manejar errores de la solicitud POST aquí, si es necesario
-                console.error('Error en la solicitud POST:', error);
+    const formData = {
+      name: nameInput.value,
+      email: emailInput.value,
+      message: messageInput.value,
+    };
 
-                // Habilitar el botón en caso de error
-                submitButton.disabled = false;
-            });
-    }
+    axios
+      .post("https://mail-service-y5h7.onrender.com/mail", formData, {
+        timeout: 60000,
+      })
+      .then((response) => {
+        nameInput.value = "";
+        emailInput.value = "";
+        messageInput.value = "";
+        submitButton.true = false;
+
+        console.log("API Response:", response.data);
+      })
+      .catch((error) => {
+        console.error("POST Request Error:", error);
+
+        submitButton.disabled = false;
+      });
+  }
 });
 
-submitButton.addEventListener('click', function () {
-    submitButton.style.backgroundColor = 'rgba(255, 87, 51, 0.8)';
+submitButton.addEventListener("click", function () {
+  submitButton.style.backgroundColor = "rgba(255, 87, 51, 0.8)";
 });
+
+const recommendationsMenu = document.querySelector(".recommendations-menu");
+const liElements = recommendationsMenu.querySelectorAll("li");
+
+if (liElements.length > 7) {
+  recommendationsMenu.classList.add("scrollable-menu");
+}

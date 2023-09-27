@@ -1,6 +1,6 @@
 /* Dentro de tu archivo styles.css o en una hoja de estilos separada */
 /* Agrega clases para tabletas */
-@media (max-width: 1023px) and (min-width: 769px){
+@media (max-width: 1023px) and (min-width: 769px) {
     .profile-items {
         display: flex;
         flex-direction: row;
@@ -18,9 +18,50 @@
         max-width: calc(50% - 8px);
         /* Ajusta el ancho de los elementos según tu diseño (50% para 2 elementos por fila) */
     }
+
 }
 
-@media (max-width: 768px){
+@media (min-width: 1024px) and (max-width: 1679px) {
+    .main-component {
+        max-height: 125vh !important;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+    .main-component::-webkit-scrollbar{
+        width: 4px;
+    }
+    .main-component::-webkit-scrollbar-thumb {
+        background-color: #ff5733;
+        /* Color del botón de la barra de desplazamiento */
+        border-radius: 2px;
+    }
+    .main-component::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+}
+
+@media (min-width: 1680px) {
+    .main-component {
+        max-height: 100vh !important;
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+
+    .main-component::-webkit-scrollbar{
+        width: 4px;
+    }
+    .main-component::-webkit-scrollbar-thumb {
+        background-color: #ff5733;
+        /* Color del botón de la barra de desplazamiento */
+        border-radius: 2px;
+    }
+    .main-component::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+
+}
+
+@media (max-width: 768px) {
     .profile-items {
         width: 100%;
     }
@@ -32,31 +73,26 @@
         flex: 1;
         /* Hace que los elementos ocupen el mismo espacio horizontalmente */
         width: 100%;
-        
+
         /* Ajusta el ancho de los elementos según tu diseño (50% para 2 elementos por fila) */
     }
 }
 
-.recommendations-menu {
-    max-height: 400px; overflow-y: auto
+.scrollable-menu {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
-/* Estilo para navegadores webkit (por ejemplo, Google Chrome) */
-.recommendations-menu::-webkit-scrollbar {
-    width: 4px; /* Ancho de la barra de desplazamiento */
-  }
-  
-  .recommendations-menu::-webkit-scrollbar-thumb {
-    background-color: #ff5733; /* Color del botón de la barra de desplazamiento */
-    border-radius: 2px; /* Radio de borde del botón de la barra de desplazamiento */
-  }
-  
-  /* Estilo para Firefox */
-  .recommendations-menu {
-    scrollbar-width: thin; /* Establecer el ancho de la barra de desplazamiento en Firefox */
-  }
-  
-  .recommendations-menu::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
-  }
-  
+.scrollable-menu::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollable-menu::-webkit-scrollbar-thumb {
+    background-color: #ff5733;
+    border-radius: 2px;
+}
+
+.scrollable-menu::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
