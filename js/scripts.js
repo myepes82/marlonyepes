@@ -46,7 +46,7 @@ form.addEventListener('submit', function (e) {
         };
 
         // Realizar la solicitud POST con Axios
-        axios.post('https://profile-backend-94t9.onrender.com/mail', formData)
+        axios.post('https://mail-service-y5h7.onrender.com/mail', formData)
             .then(response => {
                 // Limpiar el formulario después de un envío exitoso
                 nameInput.value = '';

@@ -22,7 +22,7 @@ const buildEmailMessageFromExpressBody = (emailRequest) => {
     const { email, message, name } = emailRequest;
   
     return {
-      from: "contacts.github.marlon@gmail.com",
+      from: "Marlon Yepes - [GitHub] ",
       to: "marlondevjs@gmail.com",
       subject: "New contact request - [Marlon Yepes]",
       cc: [email],
