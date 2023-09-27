@@ -7,7 +7,6 @@ const mailer = require("./functions/emailFunctions")
 
 const {NODE_ENV} = process.env
 if(NODE_ENV === "dev") dotenv.config();
-dotenv.config()
 
 const app = express()
 
