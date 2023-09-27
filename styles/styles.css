@@ -36,3 +36,27 @@
         /* Ajusta el ancho de los elementos según tu diseño (50% para 2 elementos por fila) */
     }
 }
+
+.recommendations-menu {
+    max-height: 400px; overflow-y: auto
+}
+
+/* Estilo para navegadores webkit (por ejemplo, Google Chrome) */
+.recommendations-menu::-webkit-scrollbar {
+    width: 4px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .recommendations-menu::-webkit-scrollbar-thumb {
+    background-color: #ff5733; /* Color del botón de la barra de desplazamiento */
+    border-radius: 2px; /* Radio de borde del botón de la barra de desplazamiento */
+  }
+  
+  /* Estilo para Firefox */
+  .recommendations-menu {
+    scrollbar-width: thin; /* Establecer el ancho de la barra de desplazamiento en Firefox */
+  }
+  
+  .recommendations-menu::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+  }
+  
