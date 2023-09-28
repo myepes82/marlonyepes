@@ -38,6 +38,25 @@
     .main-component::-webkit-scrollbar-track {
         background-color: #f1f1f1;
     }
+    .tech-menu{
+        width: 100%;
+    }
+    .tech-menu > li{
+        width: 100%;
+    }
+    .expertice-explanation{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .expertice-explanation > div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 }
 
 @media (min-width: 1680px) {
@@ -57,6 +76,23 @@
     }
     .main-component::-webkit-scrollbar-track {
         background-color: #f1f1f1;
+    }
+    .tech-menu{
+        column-count: 2;
+        column-gap: 20px;
+    }
+    .expertice-explanation{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .expertice-explanation > div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 50px;
+        margin-right: 50px;
     }
 
 }
@@ -96,3 +132,28 @@
 .scrollable-menu::-webkit-scrollbar-track {
     background-color: #f1f1f1;
 }
+
+/* Estilo para el cuadro de Expert */
+.expert-box {
+    width: 20px; /* Ancho del cuadro */
+    height: 20px; /* Alto del cuadro */
+    display: inline-block; /* Hace que los cuadros estén en línea con el texto */
+    margin-right: 5px; /* Espacio a la derecha del cuadro */
+  }
+  
+  /* Estilo para el cuadro de Proficient */
+  .proficient-box {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  /* Estilo para el cuadro de Medium */
+  .medium-box {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
