@@ -1,28 +1,29 @@
-const smtp = require("nodemailer")
+const nodemailer = require("nodemailer");
 
-const smtpHost = _ => {
+const createTransporter = () => {
     const {
         MAIL_HOST_USER,
         MAIL_HOST_PASSWORD,
         MAIL_HOST,
         MAIL_HOST_SSL_ENABLED
     } = process.env;
-    return smtp.createTransport({
+
+    return nodemailer.createTransport({
         port: 465,
         host: MAIL_HOST || "",
-        auth : {
+        auth: {
             user: MAIL_HOST_USER || "",
             pass: MAIL_HOST_PASSWORD || "",
         },
-        secure: MAIL_HOST_SSL_ENABLED
-    })
+        secure: MAIL_HOST_SSL_ENABLED === 'true'
+    });
 };
 
-const buildEmailMessageFromExpressBody = (emailRequest) => {
+const buildEmailMessage = (emailRequest) => {
     const { email, message, name } = emailRequest;
   
     return {
-      from: "Marlon Yepes - [GitHub] ",
+      from: "Marlon Yepes - [GitHub]",
       to: "marlondevjs@gmail.com",
       subject: "New contact request - [Marlon Yepes]",
       cc: [email],
@@ -30,7 +31,6 @@ const buildEmailMessageFromExpressBody = (emailRequest) => {
         <html>
           <head>
             <style>
-              /* Estilos CSS en línea para dar formato al correo electrónico */
               body {
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
@@ -70,29 +70,26 @@ const buildEmailMessageFromExpressBody = (emailRequest) => {
         </html>
       `,
     };
-  };
+};
 
-const getMailInstanceAndSend = (req) => {
-    const client = smtpHost();
-    if(!client){
-        console.error("Email host could be stablishied")
+const sendEmail = (req, res) => {
+    const transporter = createTransporter();
+
+    if (!transporter) {
+        console.error("Email host could not be established");
+        return res.status(500).send({ description: "Failed to send email" });
     }
-    client.sendMail(buildEmailMessageFromExpressBody(req), (err, _) => {
-        if(err) console.error(err);
-        console.log(_)
-    })
-}
-const postMessage = (res) => {
-    return res.send({
-        "description": "message was sent"
-    }).status(200)
-}
-function processor(f, g){
-    getMailInstanceAndSend(f["body"]);
-    return postMessage(g);
-}
 
+    transporter.sendMail(buildEmailMessage(req.body), (err, info) => {
+        if (err) {
+            console.error(err);
+            return res.status(500).send({ description: "Failed to send email" });
+        }
+        console.log(info);
+        return res.status(200).send({ description: "Message was sent" });
+    });
+};
 
 module.exports = {
-    sent: processor
-}
+    send: sendEmail
+};
